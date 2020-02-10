@@ -3,7 +3,7 @@
 ## Topics
 
 - Building a RESTful API.
-- Performing CRUD operations.
+- Performing CRUD operations. 
 - Writing API endpoints.
 
 ## Assignment
