@@ -14,9 +14,19 @@ server.get('/api/users', (req, res) => {
         res.status(200).json(users);
     }).catch( err => {
         console.log(err);
-        res.status(500).json({errorMessafe: `{ errorMessage: "The users information could not be retrieved." }`});
+        res.status(500).json({ errorMessage: "There was an error while saving the user to the database" });
     });
-})
+});
+
+server.post('/api/users', (req,res) => {
+    const usersInfo = req.body;
+    Users.insert(usersInfo).then(user => {
+        res.status(200).json(user);
+    }).catch( err => {
+        console.log(err);
+        res.status(500).json({errorMessage:"There was an error while saving the user to the database"});
+    });
+});
 
 const port = 5000;
 server.listen(port, () => {
