@@ -37,6 +37,15 @@ server.get('/api/users/:id', (req, res) =>{
     })
 })
 
+server.delete('/api/users/:id', (req, res) =>{
+    Users.remove(req.params.id).then(removed => {
+        res.status(200).json(removed);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({errorMessage:"There was an error while saving the user to the database"});
+    })
+})
+
 const port = 5000;
 server.listen(port, () => {
     console.log(`API on port ${port}`);
