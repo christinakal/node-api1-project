@@ -28,6 +28,15 @@ server.post('/api/users', (req,res) => {
     });
 });
 
+server.get('/api/users/:id', (req, res) =>{
+    Users.findById(req.params.id).then(user => {
+        res.status(200).json(user);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({errorMessage:"There was an error while saving the user to the database"});
+    })
+})
+
 const port = 5000;
 server.listen(port, () => {
     console.log(`API on port ${port}`);
