@@ -46,7 +46,43 @@ server.delete('/api/users/:id', (req, res) =>{
     })
 })
 
+
+server.put('/api/users/:id', (req, res) => {
+
+    const updateUser = req.body;
+
+    Users.update(req.params.id, updateUser).then( user => {
+        if (user){
+            res.status(200).json(user);
+        } else {
+            res.status(400).json({errorMassage: "There was an error"})
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({ errorMessage: 'The user information could not be modified.' })
+    })
+})
+
 const port = 5000;
 server.listen(port, () => {
     console.log(`API on port ${port}`);
 })
+
+
+// router.put("/", Auth, (req, res) => {
+//     const changes = req.body;
+//     const id = req.user.id;
+  
+//     Parent.edit(id, changes)
+//       .then(info => {
+//         if (info) {
+//           res.status(200).json({ info: changes });
+//         } else {
+//           res.status(404).json({ message: "Error getting user info" });
+//         }
+//       })
+//       .catch(err => {
+//         console.log(err);
+//         res.status(500).json({ message: "Error updating user info" });
+//       });
+//   });
